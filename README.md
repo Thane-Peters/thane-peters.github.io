@@ -1,1 +1,1 @@
-# thanep.github.io
+# thane-peters.github.io
