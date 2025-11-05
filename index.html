@@ -11,6 +11,10 @@
             box-sizing: border-box;
         }
 
+        a {
+            color: pink;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #1a1a2e;
@@ -59,6 +63,27 @@
         nav button.active {
             background-color: #d63447;
             border-color: #d63447;
+        }
+
+        .donate-btn {
+            position: fixed;
+            top: 40px;       /* move to top */
+            right: 20px;     /* move to right */
+            background-color: #d63447;
+            color: #fff;
+            padding: 1.2rem 2rem;  /* bigger button */
+            font-size: 1.2rem;     /* larger text */
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;    /* slightly more rounded */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4); /* stronger shadow for bigger button */
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .donate-btn:hover {
+            background-color: #ff4f67;
+            transform: translateY(-3px);  /* slightly bigger hover movement */
         }
 
         .page {
@@ -189,6 +214,20 @@
             font-size: 1.05rem;
         }
 
+        .site-logo {
+            position: fixed;     /* stays on screen */
+            top: -8px;           /* distance from top */
+            left: -8px;          /* distance from left */
+            width: 160px;         /* adjust size as needed */
+            height: auto;        /* maintain aspect ratio */
+            z-index: 1001;       /* above most content */
+            transition: transform 0.3s ease;
+        }
+
+        .site-logo:hover {
+            transform: scale(1.05);  /* slight hover effect */
+        }
+
         .reflection h3 {
             color: #d63447;
             margin-bottom: 1rem;
@@ -212,6 +251,7 @@
 </head>
 <body>
     <header>
+        <img src="bird-logo.png" alt="Awesome Freaking Bird Logo" class="site-logo">
         <h1>Understanding Gender-Based Violence</h1>
         <nav>
             <button class="nav-btn active" data-page="page1">Real-Time Impact</button>
@@ -230,7 +270,7 @@
         </div>
         <div class="reflection">
             <h3>Sexual Harassment</h3>
-            <p>This counter demonstrates the constant flow of sexual harassment that women face in America. In the United States of America, a woman is sexually harassed every <a href=https://news.tulane.edu/pr/rates-sexual-harassment-and-assault-nationwide-still-high-after-metoo-movement> 0.57 seconds </a>. This happens at work, in universities, on the street, and online. A whopping 82% of U.S. adults over the age of 18 have experienced sexual harassment or assault in their lifetime, and 87% of women did not disclose their experiences to anyone. <br> <br> The systems in place to help women need drastic improvement, and we can start by raising awareness of these issues. Every number represents a real person with a real experience of harassment. I implore you to consider how these faceless statistics translate into lived experiences of mothers, daughters, and sisters across the country. </p>
+            <p>This counter demonstrates the constant flow of sexual harassment that women face in America. In the United States of America, a woman is sexually harassed every <a href=https://news.tulane.edu/pr/rates-sexual-harassment-and-assault-nationwide-still-high-after-metoo-movement> 0.57 seconds </a>. This happens at work, in universities, on the street, and online. A whopping 82% of U.S. adults over the age of 18 have experienced sexual harassment or assault in their lifetime, and 87% of women did not disclose their experiences to anyone. <br> <br> The systems in place to help women need drastic improvement, and we've started by raising awareness for these issues. Every number represents a real person with a real experience of harassment. We implore you to consider how these faceless statistics translate into lived experiences of mothers, daughters, and sisters across the country. </p>
         </div>
     </div>
 
@@ -261,7 +301,7 @@
         </div>
         <div class="reflection">
             <h3>Rape and Abortions</h3>
-            <p>When <a href=https://scholar.google.com/scholar_case?case=12334123945835207673&q=Roe+v+wade+overturned&hl=en&as_sdt=2006>Roe v. Wade</a> was overturned on June 24, 2022, by the <a href=https://scholar.google.com/scholar_case?case=15560296770592570126&q=Roe+v+wade+overturned&hl=en&as_sdt=2006>Dobbs v Jackson Women’s Health Organization</a> case, 14 states outright banned abortion for their citizens. In the following 4-18 months that these states held their ban, there were an estimated <a href=https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2814274>64,565 rape-related pregnancies</a>. Staggeringly, only 5 of these states allowed exceptions for rape-related pregnancies, and specific and demanding requirements had to be met. <br> <br> There is a frightening disparity in the resources provided to victims of sexual assault versus the resources dedicated to stopping women from having <a href=https://sfu-primo.hosted.exlibrisgroup.com/permalink/f/u4bn43/TN_cdi_proquest_ebookcentralchapters_31303239_10_52>control</a> over their bodies. The laws surrounding these issues are unjust and must be brought to light to incite change in the government’s policies.</p>
+            <p>When <a href=https://scholar.google.com/scholar_case?case=12334123945835207673&q=Roe+v+wade+overturned&hl=en&as_sdt=2006>Roe v. Wade</a> was overturned on June 24, 2022, by the <a href=https://scholar.google.com/scholar_case?case=15560296770592570126&q=Roe+v+wade+overturned&hl=en&as_sdt=2006>Dobbs v Jackson Women’s Health Organization</a> case, 14 states outright banned abortion for their citizens. In the following 4-18 months that these states held their ban, there were an estimated <a href=https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2814274>64,565 rape-related pregnancies</a>. Staggeringly, only 5 of these states allowed exceptions for rape-related pregnancies, and specific and demanding requirements had to be met. <br> <br> There is a frightening disparity in the resources provided to victims of sexual assault versus the resources dedicated to stopping women from having <a href=https://sfu-primo.hosted.exlibrisgroup.com/permalink/f/u4bn43/TN_cdi_proquest_ebookcentralchapters_31303239_10_52>control</a> over their bodies. The laws surrounding these issues are unjust and we're bringing them to light to incite change in the government’s policies.</p>
         </div>
     </div>
 
@@ -388,5 +428,6 @@
             mixedGrid.innerHTML += createManIcon('#d63447').replace('woman-icon', 'large-icon');
         }
     </script>
+    <a href="https://www.yourdonationlink.com" target="_blank" class="donate-btn">Donate Now</a>
 </body>
 </html>
