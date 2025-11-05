@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Gender-Based Violence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6b2c5c 0%, #3d1a33 100%);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav button {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        nav button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        nav button.active {
+            background-color: #d63447;
+            border-color: #d63447;
+        }
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 120px);
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Page 1 Styles */
+        .counter-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .counter-text {
+            font-size: 1.5rem;
+            color: #e0e0e0;
+            margin-bottom: 1.5rem;
+        }
+
+        .counter {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #d63447;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(214, 52, 71, 0.5);
+        }
+
+        /* Page 2 Styles */
+        .toggle-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .toggle-buttons button {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-buttons button.active {
+            background-color: #d63447;
+            border-color: #d63447;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+            gap: 15px;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.30);
+            border-radius: 10px;
+        }
+
+        .woman-icon {
+            width: 30px;
+            height: 30px;
+            transition: all 0.3s ease;
+        }
+
+        /* Canvas container */
+        .canvas-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Page 4 Styles */
+        .mixed-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.30);
+            border-radius: 10px;
+        }
+
+        .large-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Reflection paragraph */
+        .reflection {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            padding: 2rem;
+            background-color: rgba(107, 44, 92, 0.2);
+            border-left: 4px solid #d63447;
+            border-radius: 5px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .reflection h3 {
+            color: #d63447;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .counter {
+                font-size: 3rem;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .icon-grid {
+                grid-template-columns: repeat(auto-fill, minmax(25px, 1fr));
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Understanding Gender-Based Violence</h1>
+        <nav>
+            <button class="nav-btn active" data-page="page1">Real-Time Impact</button>
+            <button class="nav-btn" data-page="page2">Sexual Assault Frequency</button>
+            <button class="nav-btn" data-page="page3">Rape-Related Pregnancies</button>
+            <button class="nav-btn" data-page="page4">Perpetrator Gender</button>
+        </nav>
+    </header>
+
+    <!-- Page 1: Counter -->
+    <div id="page1" class="page active">
+        <div class="counter-container">
+            <p class="counter-text">Since this page was opened...</p>
+            <div class="counter" id="counter">0</div>
+            <p class="counter-text">women have been sexually harassed in America.</p>
+        </div>
+        <div class="reflection">
+            <h3>Sexual Harassment</h3>
+            <p>This counter demonstrates the constant flow of sexual harassment that women face in America. In the United States of America, a woman is sexually harassed every 0.57 seconds. This happens at work, in universities, on the street, and online. A whopping 82% of U.S. adults over the age of 18 have experienced sexual harassment or assault in their lifetime, and 87% of women did not disclose their experiences to anyone. <br> <br> The systems in place to help women need drastic improvement, and we can start by raising awareness of these issues. Every number represents a real person with a real experience of harassment. I implore you to consider how these faceless statistics translate into lived experiences of mothers, daughters, and sisters across the country. </p>
+        </div>
+    </div>
+
+    <!-- Page 2: 100 Icons with Toggle -->
+    <div id="page2" class="page">
+        <div class="toggle-container">
+            <h2 style="margin-bottom: 1rem; color: #d63447;">1 in 5 women report being sexually assaulted at some point in their lives.</h2>
+            <div class="toggle-buttons">
+                <button class="toggle-btn active" data-count="20">Reported Assaults</button>
+                <button class="toggle-btn" data-count="52">Potential Unreported Assaults</button>
+            </div>
+            <div class="icon-grid" id="grid100"></div>
+        </div>
+        <div class="reflection">
+            <h3>Sexual Assault</h3>
+            <p>According to several studies including a meta study evaluating their validity, 1 in 5 women report having been sexually assaulted in their lifetimes. This is a staggering and alarming number of assaults, and studies show that it may not be the whole story. According to two different studies, there could be as little as 38% of sexual assaults reported to the police. This means that there could be upwards of 50% of women in the U.S. who experience some form of sexual assault in their lifetime. Sexual assaults are not ‘out of the ordinary’ or ‘exceptional’ cases by any means, despite news outlets only giving attention to “cases involving a celebrity or lurid details…”.</p>
+        </div>
+    </div>
+
+    <!-- Page 3: 64,565 Icons -->
+    <div id="page3" class="page">
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <h2 style="color: #d63447; margin-bottom: 0.5rem;">One Dot for Each Rape-Related Pregnancy</h2>
+            <p style="font-size: 1.1rem;">during the 4-18 months 14 states banned abortion following Dobbs v. Jackson Women's Health Organization</p>
+        </div>
+        <div class="canvas-container">
+            <canvas id="largeCanvas"></canvas>
+        </div>
+        <div class="reflection">
+            <h3>Rape and Abortions</h3>
+            <p>When Roe v. Wade was overturned on June 24, 2022, by the Dobbs v Jackson Women’s Health Organization case, 14 states outright banned abortion for their citizens. In the following 4-18 months that these states held their ban, there were an estimated 64,565 rape-related pregnancies. Staggeringly, only 5 of these states allowed exceptions for rape-related pregnancies, and specific and demanding requirements had to be met. <br> <br> There is a frightening disparity in the resources provided to victims of sexual assault versus the resources dedicated to stopping women from getting having control over their bodies. The laws surrounding these issues are unjust and must be brought to light to incite change in the government’s policies.</p>
+        </div>
+    </div>
+
+    <!-- Page 4: Mixed Icons -->
+    <div id="page4" class="page">
+        <div style="text-align: center; margin-bottom: 0.5rem;">
+            <h2 style="color: #d63447; margin-bottom: 0.0rem;">93.5% of Sexual Abusers are Men</h2>
+            <!-- <p style="font-size: 1.1rem;"></p> -->
+        </div>
+        <div class="mixed-grid" id="mixedGrid"></div>
+        <div class="reflection">
+            <h3>Young Men's Education</h3>
+            <p>Women are not exempt from sexual crimes, but they make up a mere fraction of the sexual abuse offenders in the U.S. This disparity highlights a glaring issue in today’s society regarding education: young men are not educated on respectful behaviour. Messaging about rape, assault, and harassment is almost exclusively targeted at the victims (who are primarily women), telling them to carry a whistle, carry pepper spray, take self defense courses. <br> <br> Any messaging directed towards men regarding sexual assault or the pent-up feelings that may result in violent action would go a long way. A proactive approach to the prevention and education surrounding sexual assault would be extraordinary, starting with the education in schools. In recent years, social media personalities such as Andrew Tate have blown up on the internet, leading young boys and men to misogynistic ideals; teachers are left with precious few resources to combat these ideologies, as curriculums are commonly devoid of these issues.</p>
+        </div>
+    </div>
+
+    <script>
+        // Page navigation
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const pages = document.querySelectorAll('.page');
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetPage = button.dataset.page;
+
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                pages.forEach(page => page.classList.remove('active'));
+                document.getElementById(targetPage).classList.add('active');
+            });
+        });
+
+        // Page 1: Counter
+        let count = 0;
+        const counterElement = document.getElementById('counter');
+        const startTime = Date.now();
+
+        function updateCounter() {
+            const elapsed = (Date.now() - startTime) / 1000;
+            count = Math.floor(elapsed * 1.75);
+            counterElement.textContent = count.toLocaleString();
+            requestAnimationFrame(updateCounter);
+        }
+        updateCounter();
+
+        // SVG icon generators
+        function createWomanIcon(color) {
+            return `<svg class="woman-icon" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="6" r="3"/>
+                <path d="M12 11c-3 0-5 2-5 4v2h10v-2c0-2-2-4-5-4z"/>
+                <path d="M10 17v5h1v-5h2v5h1v-5"/>
+            </svg>`;
+        }
+
+        function createManIcon(color) {
+            return `<svg class="woman-icon" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="6" r="3"/>
+                <path d="M12 11c-3 0-5 2-5 4v7h2v-7h6v7h2v-7c0-2-2-4-5-4z"/>
+            </svg>`;
+        }
+
+        // Page 2: 100 icons with toggle
+        const grid100 = document.getElementById('grid100');
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+
+        function renderGrid100(redCount) {
+            grid100.innerHTML = '';
+            for (let i = 0; i < 100; i++) {
+                const color = i < redCount ? '#d63447' : '#2a2a2a';
+                grid100.innerHTML += createWomanIcon(color);
+            }
+        }
+
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                toggleButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const count = parseInt(button.dataset.count);
+                renderGrid100(count);
+            });
+        });
+
+        renderGrid100(20); // Initial render
+
+        // Page 3: 64,565 icons using Canvas
+        const canvas = document.getElementById('largeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawLargeGrid() {
+            const totalIcons = 64565;
+            const iconSize = 5;
+            const gap = 6;
+            const spacing = iconSize + gap;
+            const iconsPerRow = Math.floor(900 / spacing);
+            const rows = Math.ceil(totalIcons / iconsPerRow);
+
+            canvas.width = 900;
+            canvas.height = rows * spacing;
+
+            ctx.fillStyle = '#d63447';
+
+            for (let i = 0; i < totalIcons; i++) {
+                const row = Math.floor(i / iconsPerRow);
+                const col = i % iconsPerRow;
+                const x = col * spacing;
+                const y = row * spacing;
+
+                // Draw simple figure representation
+                ctx.beginPath();
+                ctx.arc(x + iconSize/2, y + iconSize/2, iconSize/2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        drawLargeGrid();
+
+        // Page 4: Mixed icons (only 100 total, so safe to use DOM)
+        const mixedGrid = document.getElementById('mixedGrid');
+        for (let i = 0; i < 6; i++) {
+            mixedGrid.innerHTML += createWomanIcon('#2a2a2a').replace('woman-icon', 'large-icon');
+        }
+        for (let i = 0; i < 94; i++) {
+            mixedGrid.innerHTML += createManIcon('#d63447').replace('woman-icon', 'large-icon');
+        }
+    </script>
+</body>
+</html>
